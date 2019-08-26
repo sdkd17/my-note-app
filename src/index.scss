@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+	display: block;
+	border: solid 1px white;
+
+	.header {
+		height: 50px;
+		background-color: blue;
+	}
+
+	.body {
+		background-color: gray;
+	}
+
+}
+
+.left {
+	width: 25%;
+	float: left;
+	
+}
+
+.hide {
+	visibility: hidden;
+}
+
+
+.right {
+	width: 75%;
+	float: left;
+}
