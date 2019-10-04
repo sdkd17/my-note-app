@@ -10,6 +10,8 @@ class Container extends Component {
 
 		this.state = {
 			notes: [],
+			filter: false,
+			filtered: [],
 			selected: -1,
 			hideLeft: false,
 		};
@@ -28,26 +30,37 @@ class Container extends Component {
 			note = this.state.notes[this.state.selected];
 		}
 
-		let klassL = "container left";
-		if (this.state.hideLeft){
-			klassL =  klassL + " hide"
-		}
 		
-		let klassR = "container"
-		if (!this.state.hideLeft){
-			klassR = klassR + " right"
+		let klassR = "container right";
+		if (this.state.hideLeft){
+			klassR = "container full-width";
 		}
+		let notes = [];
+		if (!this.state.filter) {
+			notes = this.state.notes;
+		}else{
+			notes = this.state.filtered;
+		}
+		 
+		
+		let leftContainer;
+		if (!this.state.hideLeft) {
+			leftContainer = <LeftContainer className="container left" 
+				notes={notes}
+				sel={this.state.selected}
+				handleNewNote={() => this.handleNewNote()}
+				selectNote={(i) => this.handleChangeSelection(i)}
+				handleSearch={(e) => this.handleSearch(e)}
+			/>
+		} 
 
 		return(
 
 			<div >
-				<LeftContainer className={klassL} 
-											notes={this.state.notes}
-											sel={this.state.selected}
-											handleNewNote={() => this.handleNewNote()}
-											selectNote={(i) => this.handleChangeSelection(i)}
-				/>
-				<RightContainer className="container" 
+				
+				{leftContainer}
+
+				<RightContainer className={klassR} 
 												note={note}
 												index={this.state.selected}
 												updateNote={(index, content) => this.updateNote(index, content)}
@@ -60,7 +73,7 @@ class Container extends Component {
 
 	handleNewNote(){
 		let notes = this.state.notes.slice();
-		notes.push({title:'new note ' + notes.length, content: 'new note ' + notes.length});
+		notes.push({title:'new note...', content: ''});
 		
 		this.setState({
 			notes: notes,
@@ -91,10 +104,11 @@ class Container extends Component {
 	saveNote(){
 		let notes = this.state.notes.slice();
 		notes[this.state.selected].content = this.currentContent;
-			
-			this.setState({
-				notes: notes,
-			})
+		notes[this.state.selected].title = /.*\n/.exec(this.currentContent);	
+
+		this.setState({
+			notes: notes,
+		})
 	}
 
 	hideLeftPanel(){
@@ -102,6 +116,28 @@ class Container extends Component {
 		this.setState({
 			hideLeft: !hideL,
 		})
+	}
+
+	handleSearch(e){
+
+		console.log(e.target.value);
+
+		let value = e.target.value;
+		let filtered = [];
+		if (value !== "") {
+			let notes = this.state.notes.slice();
+			filtered = notes.filter(note => note.includes(value));
+
+			this.setState({
+				filter: true,
+				filtered: filtered,
+			})
+		}else{
+			this.setState({
+				filter: false,
+				
+			})
+		}
 	}
 
 }

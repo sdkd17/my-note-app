@@ -5,14 +5,88 @@
 .container {
 	display: block;
 	border: solid 1px white;
+	height: 100%;
 
 	.header {
+		display: flex;
+		justify-content: space-between;
 		height: 50px;
 		background-color: blue;
+		padding: 5px;
+		
+		.flex-item {
+
+		}
+
+		form {
+			margin: none;
+			padding: 10px;
+		}
+
+		button {
+			background-color: #487ADEFF;
+			border: none;
+			padding: none;
+			color: white;
+		}
+
+		button:hover {
+			background-color: white;
+			color: black;
+		}
+
+		button:focus {
+			outline: 0;
+		}
 	}
 
 	.body {
 		background-color: gray;
+		
+		.note-list{
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			
+			.list-item {
+				background-color: #487ADEFF; /* Green */
+			  text-align: center;		  
+			  display: block;
+				
+				button {
+					color: white;
+					background-color: #487ADEFF;
+					border: none;
+					padding: none;
+					width: 100%; 
+					text-decoration: none;
+
+				}
+				button:focus {
+					outline: 0;
+				}
+				span.selected {
+					font-weight: bold;
+				}	
+
+				button.selected {
+					background-color: gray;
+				}
+			}
+
+			
+			.list-item:hover {
+				background-color: white;
+				button{
+					color: black;
+					background-color: white;
+
+				}		
+			}	
+
+			
+		}
+
 	}
 
 }
@@ -23,12 +97,18 @@
 	
 }
 
-.hide {
-	visibility: hidden;
-}
-
-
 .right {
 	width: 75%;
 	float: left;
 }
+
+.hide {
+	visibility: hidden;
+}
+
+.full-width {
+	width: 100%;
+}
+
+
+

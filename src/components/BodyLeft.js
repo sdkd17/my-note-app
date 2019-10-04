@@ -6,7 +6,7 @@ class BodyLeft extends Component {
 	render(){
 		let notes;
 		if (this.props.notes.length === 0)
-			notes = <p> No Notes </p>
+			notes = <span> No Notes </span>
 		else {
 			
 			notes= this.props.notes.map( (note,i) => (
@@ -14,9 +14,14 @@ class BodyLeft extends Component {
 								className= "list-item"
 						> 
 
-							<button onClick={() => this.props.handleSelectNote(i)}> 
-								{	(this.props.selected === i) ? note.title + "selected" 
-																							: note.title }  
+							<button onClick={() => this.props.handleSelectNote(i)}
+											className={(this.props.selected === i) ? "selected" 
+																															: "unselected"} > 
+							
+								<span className={(this.props.selected === i) ? "selected" 
+																															: "unselected"} > 
+									{note.title} 
+								</span> 
 							</button> 
 						</li>
 					))

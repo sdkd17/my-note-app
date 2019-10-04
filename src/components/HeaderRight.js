@@ -6,9 +6,13 @@ class HeaderLeft extends Component {
 	render(){
 		return(
 			<div className="header">
-				 <button onClick={this.props.hideLeftPanel}> FocusMode </button>
-				 <button onClick={this.props.saveNote}> Save </button>
-				 <button > Trash </button>
+				<div className="felx-item">
+					<button onClick={this.props.hideLeftPanel}> FocusMode </button>
+			  </div>
+			 	<div className="felx-item">
+					<button onClick={this.props.saveNote}> Save </button>
+					<button > Trash </button>
+				</div>
 			</div>
 		);
 	}

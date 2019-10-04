@@ -6,7 +6,13 @@ class HeaderLeft extends Component {
 	render(){
 		return(
 			<div className="header">
-				<button onClick={this.props.NewNote}> New Note </button>
+				
+			  <button onClick={this.props.NewNote}> New Note </button> 
+			 
+				
+		    <input type="text" placeholder="Search" onChange={this.props.handleSearch} />
+				
+				
 			</div>
 		);
 	}
