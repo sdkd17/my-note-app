@@ -14,6 +14,7 @@ class Container extends Component {
 			filtered: [],
 			selected: -1,
 			hideLeft: false,
+			deleted: [], 
 		};
 		
 		this.currentContent = "";
@@ -47,7 +48,7 @@ class Container extends Component {
 		if (!this.state.hideLeft) {
 			leftContainer = <LeftContainer className="container left" 
 				notes={notes}
-				sel={this.state.selected}
+				sel={this.state.selected}				
 				handleNewNote={() => this.handleNewNote()}
 				selectNote={(i) => this.handleChangeSelection(i)}
 				handleSearch={(e) => this.handleSearch(e)}
@@ -65,7 +66,9 @@ class Container extends Component {
 												index={this.state.selected}
 												updateNote={(index, content) => this.updateNote(index, content)}
 												saveNote={() => this.saveNote()}
+												hideLeft = {this.state.hideLeft}
 												hideLeftPanel={() => this.hideLeftPanel()}
+												deleteNote={() => this.deleteNote()}
 				/>
 			</div>
 		);
@@ -95,16 +98,15 @@ class Container extends Component {
 	}
 
 	updateNote(index, content){
-		if (index >= 0){
-			// console.log(content);	
+		if (index >= 0){			
 			this.currentContent = content; 
 		}
 	}
 
 	saveNote(){
 		let notes = this.state.notes.slice();
-		notes[this.state.selected].content = this.currentContent;
-		notes[this.state.selected].title = /.*\n/.exec(this.currentContent);	
+		notes[this.state.selected].content = this.currentContent;		
+		notes[this.state.selected].title = /[^\n]*/.exec(this.currentContent)[0];	
 
 		this.setState({
 			notes: notes,
@@ -120,13 +122,11 @@ class Container extends Component {
 
 	handleSearch(e){
 
-		console.log(e.target.value);
-
 		let value = e.target.value;
 		let filtered = [];
 		if (value !== "") {
 			let notes = this.state.notes.slice();
-			filtered = notes.filter(note => note.includes(value));
+			filtered = notes.filter(note => note.content.includes(value));
 
 			this.setState({
 				filter: true,
@@ -138,6 +138,23 @@ class Container extends Component {
 				
 			})
 		}
+	}
+
+	deleteNote(){
+		let notes = this.state.notes.slice();
+		let deleted = this.state.deleted.slice();
+		let selected = this.state.selected;
+
+		let deletedNote = notes[selected];
+		deleted.push(deletedNote);
+		let notesSpliced = notes.splice(selected,1);
+		
+
+		this.setState({
+			notes: notes,
+			selected: selected-1,
+			deleted: deleted,
+		});
 	}
 
 }

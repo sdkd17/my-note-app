@@ -8,25 +8,24 @@
 	height: 100%;
 
 	.header {
-		display: flex;
-		justify-content: space-between;
 		height: 50px;
-		background-color: blue;
 		padding: 5px;
+		background-color: blue;
+		display: flex;
+		justify-content: space-between;		
 		
 		.flex-item {
-
+			padding-top: 10px;
 		}
-
-		form {
-			margin: none;
-			padding: 10px;
+		
+		input {
+			padding: 5px;
 		}
 
 		button {
 			background-color: #487ADEFF;
 			border: none;
-			padding: none;
+			padding: 5px;
 			color: white;
 		}
 
@@ -44,6 +43,7 @@
 		background-color: gray;
 		
 		.note-list{
+			text-align: center;
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
@@ -62,9 +62,11 @@
 					text-decoration: none;
 
 				}
+				
 				button:focus {
 					outline: 0;
 				}
+				
 				span.selected {
 					font-weight: bold;
 				}	
@@ -83,23 +85,22 @@
 
 				}		
 			}	
-
-			
 		}
-
 	}
-
 }
 
 .left {
 	width: 25%;
 	float: left;
+	position: fixed;
+	overflow: auto;
 	
 }
 
 .right {
 	width: 75%;
-	float: left;
+	float: right;
+	padding-left: 5px;
 }
 
 .hide {
@@ -109,6 +110,32 @@
 .full-width {
 	width: 100%;
 }
+
+.fas {
+	font-size: 1.5em;
+} 
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+
+	.tooltiptext {
+		visibility: hidden;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+
+		position: absolute;
+		z-index: 1;
+	}
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
 
 
 

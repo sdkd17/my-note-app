@@ -7,11 +7,23 @@ class HeaderLeft extends Component {
 		return(
 			<div className="header">
 				
-			  <button onClick={this.props.NewNote}> New Note </button> 
-			 
+				<div className="flex-item">		  
+		  		<button title="Show SideBar"> 
+		  			<span className={this.props.showSidebar?
+		  										"fas fa-angle-double-left":"fas fa-angle-double-right"}> 
+		  			</span>
+		  		</button> 
+		  		<button title="New Note" 
+		  						onClick={this.props.NewNote}> 
+		  			<span className="fas fa-plus">  </span> 
+		  		</button> 
+		 		</div>
+
 				
-		    <input type="text" placeholder="Search" onChange={this.props.handleSearch} />
 				
+				<div className="flex-item">
+		    	<input type="text" placeholder="Search" onChange={this.props.handleSearch} />
+				</div>
 				
 			</div>
 		);

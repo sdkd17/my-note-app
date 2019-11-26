@@ -10,7 +10,9 @@ class LeftContainer extends Component {
 		return(
 			<div className={this.props.className}>
 				<HeaderLeft NewNote={this.props.handleNewNote}
-										handleSearch={this.props.handleSearch}/>
+										handleSearch={this.props.handleSearch}
+	
+				/>
 			 	<BodyLeft notes={notes}
 			 						selected={this.props.sel}
 			 						handleSelectNote={i => this.props.selectNote(i)}/>

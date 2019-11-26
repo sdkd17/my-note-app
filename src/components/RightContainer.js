@@ -9,8 +9,11 @@ class RightContainer extends Component {
 		
 		return(
 			<div className={this.props.className}>
-				<HeaderRight saveNote={this.props.saveNote}
-											hideLeftPanel={this.props.hideLeftPanel}/>
+				<HeaderRight 	saveNote={this.props.saveNote}
+											hideLeft= {this.props.hideLeft}
+											hideLeftPanel={this.props.hideLeftPanel}
+											deleteNote={this.props.deleteNote}
+				/>
 			 	<BodyRight 	noteBody={this.props.note}
 			 							index={this.props.index}
 		 							 	updateNote={this.props.updateNote}
