@@ -13,6 +13,8 @@ class RightContainer extends Component {
 											hideLeft= {this.props.hideLeft}
 											hideLeftPanel={this.props.hideLeftPanel}
 											deleteNote={this.props.deleteNote}
+											info={this.props.info}
+
 				/>
 			 	<BodyRight 	noteBody={this.props.note}
 			 							index={this.props.index}

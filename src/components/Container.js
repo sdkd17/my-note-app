@@ -14,6 +14,7 @@ class Container extends Component {
 			filtered: [],
 			selected: -1,
 			hideLeft: false,
+			sideBar: false,
 			deleted: [], 
 		};
 		
@@ -26,7 +27,7 @@ class Container extends Component {
 
 	render(){
 		
-		let note = {title: "New note", content: ""}
+		let note = {title: "New note", content: "", words: 0, chars:0}
 		if (this.state.selected >= 0) {
 			note = this.state.notes[this.state.selected];
 		}
@@ -46,13 +47,37 @@ class Container extends Component {
 		
 		let leftContainer;
 		if (!this.state.hideLeft) {
-			leftContainer = <LeftContainer className="container left" 
-				notes={notes}
-				sel={this.state.selected}				
-				handleNewNote={() => this.handleNewNote()}
-				selectNote={(i) => this.handleChangeSelection(i)}
-				handleSearch={(e) => this.handleSearch(e)}
-			/>
+			if (!this.state.sideBar) {
+				leftContainer = 
+				<LeftContainer className="container left" 
+					notes={notes}
+					sel={this.state.selected}				
+					handleNewNote={() => this.handleNewNote()}
+					selectNote={(i) => this.handleChangeSelection(i)}
+					handleSearch={(e) => this.handleSearch(e)}
+					sideBar = {this.state.sideBar}
+					showSidebar={ () => this.showSidebar()}
+				/>
+			} else {
+				leftContainer = 
+				<div className="container left" >
+					<LeftContainer className="cont-notas" 
+						notes={notes}
+						sel={this.state.selected}				
+						handleNewNote={() => this.handleNewNote()}
+						selectNote={(i) => this.handleChangeSelection(i)}
+						handleSearch={(e) => this.handleSearch(e)}
+						sideBar = {this.state.sideBar}
+						showSidebar={ () => this.showSidebar()}
+					/>
+					<div>
+						<ul> 
+							<li> All notes </li>
+							<li> Trash </li>
+						</ul>
+					</div>
+				</div>
+			}
 		} 
 
 		return(
@@ -69,6 +94,8 @@ class Container extends Component {
 												hideLeft = {this.state.hideLeft}
 												hideLeftPanel={() => this.hideLeftPanel()}
 												deleteNote={() => this.deleteNote()}
+												info={[note.words, note.chars]}
+												
 				/>
 			</div>
 		);
@@ -76,7 +103,7 @@ class Container extends Component {
 
 	handleNewNote(){
 		let notes = this.state.notes.slice();
-		notes.push({title:'new note...', content: ''});
+		notes.push({title:'new note...', content: '', words:0, chars:0});
 		
 		this.setState({
 			notes: notes,
@@ -107,6 +134,8 @@ class Container extends Component {
 		let notes = this.state.notes.slice();
 		notes[this.state.selected].content = this.currentContent;		
 		notes[this.state.selected].title = /[^\n]*/.exec(this.currentContent)[0];	
+		notes[this.state.selected].words = this.currentContent.split(/[\s\n]/).length;	
+		notes[this.state.selected].chars = this.currentContent.length;	
 
 		this.setState({
 			notes: notes,
@@ -157,6 +186,13 @@ class Container extends Component {
 		});
 	}
 
+	showSidebar() {
+		const sidebar = this.state.sideBar;
+		console.log(this.state.sideBar);
+		this.setState({
+			sideBar: !sidebar,
+		})
+	}
 }
 
 export default Container;

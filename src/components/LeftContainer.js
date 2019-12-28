@@ -11,6 +11,8 @@ class LeftContainer extends Component {
 			<div className={this.props.className}>
 				<HeaderLeft NewNote={this.props.handleNewNote}
 										handleSearch={this.props.handleSearch}
+										sideBar = {this.props.sideBar}
+										showSidebar={this.props.showSidebar}
 	
 				/>
 			 	<BodyLeft notes={notes}
